@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/7eminar.iml" filepath="$PROJECT_DIR$/.idea/7eminar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/7eminar.local.iml" filepath="$PROJECT_DIR$/.idea/7eminar.local.iml" />
     </modules>
   </component>
 </project>
