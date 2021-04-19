@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in!') }} Go to <a href="{{ route('dashboard') }}">dashboard</a>.
                 </div>
             </div>
         </div>

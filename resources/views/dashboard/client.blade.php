@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard (Client)') }}</div>
+                <div class="card-header">{{ __('Dashboard (Client Area)') }}</div>
 
                 <div class="card-body">
                     <h2>New Request</h2>

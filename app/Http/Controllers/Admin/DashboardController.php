@@ -19,7 +19,8 @@ class DashboardController extends Controller
             return view('dashboard.client');
         }
         if(auth()->user()->hasRole('manager')) {
-            return 'manager';
+            $paginator = \App\Models\Request::paginate(10);
+            return view('dashboard.manager', compact('paginator'));
         }
     }
 
@@ -57,11 +58,31 @@ class DashboardController extends Controller
             $fileName = time().'_'.$request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
             $requestModel->file_path = '/storage/' . $filePath;
+            $requestModel->checked = false;
             $requestModel->save();
 
             return back()
-                ->with('success','Request has been created.')
+                ->with('success','Request has been created successfully.')
                 ->with('file', $fileName);
+        }
+
+        if(auth()->user()->hasRole('manager')) {
+
+            $data = $request->all();
+
+            foreach($data as $key => $value){
+                $keyArr = explode('-', $key);
+                if($keyArr[0] === 'checked'){
+                    $request = \App\Models\Request::find( (int) $keyArr[1] );
+                    if($request){
+                        $request->checked = (boolean) $value;
+                        $request->save();
+                    }
+                }
+            }
+
+            return back()
+                ->with('success','Operation performed successfully.');
         }
     }
 

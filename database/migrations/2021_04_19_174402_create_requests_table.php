@@ -19,6 +19,7 @@ class CreateRequestsTable extends Migration
             $table->string('subject');
             $table->text('message');
             $table->string('file_path');
+            $table->boolean('checked');
             $table->timestamps();
         });
     }
