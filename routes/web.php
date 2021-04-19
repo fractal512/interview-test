@@ -14,14 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-    $user = App\Models\User::find(1);
+    return view('welcome');
+    /*$user = App\Models\User::find(1);
     dd($user->hasRole('manager'),
         $user->hasRole('client'),
         $user->givePermissionsTo('manage-requests'),
-        $user->hasPermission('manage-requests'));
+        $user->hasPermission('manage-requests'));*/
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'role:manager'], function() {
+    Route::get('/dashboard', function() {
+        return 'manger';
+    });
+});
