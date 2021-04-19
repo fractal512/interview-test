@@ -60,17 +60,15 @@
                                 @php /** @var \App\Models\Request $request */ @endphp
                                 <tr>
                                     <td>
-                                        <input name="checked-{{ $request->id }}"
-                                               type="hidden"
-                                               value="0">
-                                        <input name="checked-{{ $request->id }}"
-                                               type="checkbox"
-                                               id="is_checked"
-                                               value="1"
-                                               @if($request->checked)
-                                                checked="checked"
-                                               @endif
-                                        >
+                                        @if($request->checked)
+                                            ✅
+                                        @else
+                                            <input name="checked-{{ $request->id }}"
+                                                   type="checkbox"
+                                                   id="checked-{{ $request->id }}"
+                                                   value="1"
+                                            >
+                                        @endif
                                     </td>
                                     <td>{{ $request->id }}</td>
                                     <td>{{ $request->subject }}</td>

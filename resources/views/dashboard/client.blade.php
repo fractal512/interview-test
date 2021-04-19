@@ -59,7 +59,7 @@
                                     <textarea name="message"
                                               id="message"
                                               class="form-control"
-                                              rows="10" required></textarea>
+                                              rows="5" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="label" for="file">Select file:</label>

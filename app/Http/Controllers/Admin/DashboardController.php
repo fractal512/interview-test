@@ -75,7 +75,8 @@ class DashboardController extends Controller
                 if($keyArr[0] === 'checked'){
                     $request = \App\Models\Request::find( (int) $keyArr[1] );
                     if($request){
-                        $request->checked = (boolean) $value;
+                        if ($request->checked) continue;
+                        if ((boolean) $value) $request->checked = true;
                         $request->save();
                     }
                 }
