@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dashboard\Client\ClientDashboard;
 use App\Http\Controllers\Controller;
+use App\Jobs\RequestAfterCreateJob;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+
+    /**
+     * DashboardController constructor.
+     */
+    public function __construct(Request $request)
+    {
+        //$this->middleware('clientthrottle:3,1440')->only('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,6 +69,9 @@ class DashboardController extends Controller
             $requestModel->file_path = '/storage/' . $filePath;
             $requestModel->checked = false;
             $requestModel->save();
+
+            $job = new RequestAfterCreateJob($requestModel);
+            $this->dispatch($job);
 
             return back()
                 ->with('success','Request has been created successfully.')
