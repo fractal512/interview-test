@@ -41,7 +41,28 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(auth()->user()->hasRole('client')) {
+            $request->validate([
+                'subject' => 'required|min:5|max:200',
+                'message' => 'required|min:5|max:5000',
+                'file' => 'required|max:2048',
+            ]);
+
+
+            $requestModel = new \App\Models\Request();
+            $requestModel->user_id = auth()->user()->id;
+            $data = $request->all();
+            $requestModel->subject = $data['subject'];
+            $requestModel->message = $data['message'];
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+            $requestModel->file_path = '/storage/' . $filePath;
+            $requestModel->save();
+
+            return back()
+                ->with('success','Request has been created.')
+                ->with('file', $fileName);
+        }
     }
 
     /**

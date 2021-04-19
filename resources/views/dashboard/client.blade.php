@@ -8,9 +8,35 @@
                 <div class="card-header">{{ __('Dashboard (Client)') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    <h2>New Request</h2>
+
+                    @if($errors->any())
+                        <div class="row justify-content-center">
+                            <div class="col-md-11">
+                                <div class="alert alert-danger" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    <ul>
+                                        @foreach($errors->all() as $errorTxt)
+                                            <li>{{ $errorTxt }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(session('success'))
+                        <div class="row justify-content-center">
+                            <div class="col-md-11">
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ session()->get('success') }}
+                                </div>
+                            </div>
                         </div>
                     @endif
 
@@ -20,24 +46,24 @@
 
                             <div id="maindata" class="tab-pane active" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="title">Subject</label>
-                                    <input name="title" value=""
-                                           id="title"
+                                    <label for="subject">Subject:</label>
+                                    <input name="subject" value=""
+                                           id="subject"
                                            type="text"
                                            class="form-control"
                                            minlength="3"
                                            required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="content_raw">Message</label>
-                                    <textarea name="content_raw"
-                                              id="content_raw"
+                                    <label for="message">Message:</label>
+                                    <textarea name="message"
+                                              id="message"
                                               class="form-control"
-                                              rows="10"></textarea>
+                                              rows="10" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label class="label" for="file">Select file</label>
-                                    <input type="file" name="file" class="form-control-file" id="file">
+                                    <label class="label" for="file">Select file:</label>
+                                    <input type="file" name="file" class="form-control-file" id="file" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Send Request</button>
