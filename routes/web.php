@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +27,37 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => 'role:manager'], function() {
+/*Route::middleware(['role:client'])->group(function() {
     Route::get('/dashboard', function() {
-        return 'manger';
+        return 'client';
     });
+});*/
+
+/*Route::middleware(['auth', 'role:manager'])->group(function() {
+    Route::get('/dashboard', function() {
+        return 'manager';
+    });
+});
+
+Route::middleware(['auth', 'role:client'])->group(function() {
+    Route::get('/dashboard', function() {
+        return 'client';
+    });
+});*/
+
+Route::middleware(['auth:web'])->group(function() {
+
+    /*if($request->user()->hasRole('client')) {
+        Route::get('/dashboard', function () {
+            return 'client';
+        });
+    }
+    if($request->user()->hasRole('manager')) {
+        Route::get('/dashboard', function () {
+            return 'manager';
+        });
+    }*/
+
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'store'])->name('dashboard.store');
 });
