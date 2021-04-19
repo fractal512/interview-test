@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    $user = App\Models\User::find(1);
+    dd($user->hasRole('manager'),
+        $user->hasRole('client'),
+        $user->givePermissionsTo('manage-requests'),
+        $user->hasPermission('manage-requests'));
 });
 
 Auth::routes();
