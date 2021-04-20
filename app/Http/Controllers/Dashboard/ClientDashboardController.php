@@ -14,7 +14,7 @@ class ClientDashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('throttle:3,1440')->only('index');
+        $this->middleware('clientthrottle:3,1440')->only('index');
     }
 
     /**

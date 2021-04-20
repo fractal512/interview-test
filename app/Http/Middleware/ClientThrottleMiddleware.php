@@ -9,6 +9,6 @@ class ClientThrottleMiddleware extends ThrottleRequests
 {
     protected function resolveRequestSignature($request)
     {
-        return $request->user()->hasRole('client');
+        return $request->session()->token();
     }
 }
