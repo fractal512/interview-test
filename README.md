@@ -55,6 +55,12 @@ php artisan db:seed
 php artisan queue:listen
 ```
 
+6. Run server:
+
+```shell script
+php artisan serve
+```
+
 ### Default accounts:
 
 By default, two accounts created for a manager and client:
