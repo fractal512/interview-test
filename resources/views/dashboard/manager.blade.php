@@ -40,7 +40,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('dashboard.store') }}">
+                    <form method="POST" action="{{ route('dashboard-manager.store') }}">
                         @csrf
                         <table class="table table-hover">
                             <thead>

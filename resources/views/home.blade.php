@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }} Go to <a href="{{ route('dashboard') }}">dashboard</a>.
+                    {{ __('You are logged in!') }} Go to
+                        @role('manager')
+                            <a href="{{ route('dashboard-manager') }}">dashboard</a>.
+                        @endrole
+
+                        @role('client')
+                        <a href="{{ route('dashboard-client') }}">dashboard</a>.
+                        @endrole
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@
                         </div>
                     @endif
 
-                        <form method="POST" action="{{ route('dashboard.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('dashboard-client.store') }}" enctype="multipart/form-data">
 
                             @csrf
 

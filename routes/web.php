@@ -27,37 +27,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/*Route::middleware(['role:client'])->group(function() {
-    Route::get('/dashboard', function() {
-        return 'client';
-    });
-});*/
-
-/*Route::middleware(['auth', 'role:manager'])->group(function() {
-    Route::get('/dashboard', function() {
-        return 'manager';
-    });
-});
-
-Route::middleware(['auth', 'role:client'])->group(function() {
-    Route::get('/dashboard', function() {
-        return 'client';
-    });
-});*/
-
 Route::middleware(['auth:web'])->group(function() {
 
-    /*if($request->user()->hasRole('client')) {
-        Route::get('/dashboard', function () {
-            return 'client';
-        });
-    }
-    if($request->user()->hasRole('manager')) {
-        Route::get('/dashboard', function () {
-            return 'manager';
-        });
-    }*/
+    // Client Dashboard
+    Route::get('/dashboard-client', [App\Http\Controllers\Dashboard\ClientDashboardController::class, 'index'])->name('dashboard-client');
+    Route::post('/dashboard-client', [App\Http\Controllers\Dashboard\ClientDashboardController::class, 'store'])->name('dashboard-client.store');
 
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'store'])->name('dashboard.store');
+    // Manager Dashboard
+    Route::get('/dashboard-manager', [App\Http\Controllers\Dashboard\ManagerDashboardController::class, 'index'])->name('dashboard-manager');
+    Route::post('/dashboard-manager', [App\Http\Controllers\Dashboard\ManagerDashboardController::class, 'store'])->name('dashboard-manager.store');
+
 });
